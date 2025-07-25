@@ -8,6 +8,10 @@ fn main() {
     // プログラムの引数
     // 引数は，[1] 辞書ファイルのパス，[2] 単語長の下限，[3] 単語長の上限
     let args: Vec<String> = env::args().collect();
+    if args.len() != 4 {
+	eprintln!("Usage: {} <filepath> <min_len> <max_len>", args[0]);
+	return;
+    }
 
     // ファイルのパス名
     let filename: String = args[1].parse().expect("このファイルは読めません．");
