@@ -60,7 +60,7 @@ impl Graph {
                 }
             }
 
-	    // 有向辺の追加
+	    // 辺の追加
             for group in wildcard_map.values() {
 		// 要素数が2以上なら隣接する単語が存在
                 if group.len() < 2 { continue; }
@@ -91,7 +91,7 @@ impl Graph {
             let shorter_words_set: HashSet<&str> = words_by_len.get(&len1).unwrap().iter().map(|v| v.as_str()).collect();
             let longer_words: &Vec<&Vertex> = words_by_len.get(&len2).unwrap();
 
-	    // 長い方の単語から一文字削除した単語が，短い方の単語リストに含まれていれば有向辺を追加
+	    // 長い方の単語から一文字削除した単語が，短い方の単語リストに含まれていれば辺を追加
             for &long_word in longer_words {
                 let long_chars: Vec<char> = long_word.chars().collect();
                 for j in 0..long_chars.len() {

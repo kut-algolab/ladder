@@ -54,7 +54,7 @@ fn main() {
     // 構築時間を計測
     // let start = Instant::now();
 
-    // グラフを作成
+    // 単語を頂点とし，一文字の置換・追加・削除で移り変われる単語間に辺を持つグラフを作成
     let g = Graph::read_vertices_and_make_graph(filtered_words);
 
     // let duration = start.elapsed();
