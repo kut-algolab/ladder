@@ -8,6 +8,10 @@ fn main() {
     // プログラムの引数
     // 引数は，[1] 辞書ファイルのパス，[2] 単語長の下限，[3] 単語長の上限
     let args: Vec<String> = env::args().collect();
+    if args.len() != 4 {
+	eprintln!("Usage: {} <filepath> <min_len> <max_len>", args[0]);
+	return;
+    }
 
     // ファイルのパス名
     let filename: String = args[1].parse().expect("このファイルは読めません．");
@@ -50,7 +54,7 @@ fn main() {
     // 構築時間を計測
     // let start = Instant::now();
 
-    // グラフを作成
+    // 単語を頂点とし，一文字の置換・追加・削除で移り変われる単語間に辺を持つグラフを作成
     let g = Graph::read_vertices_and_make_graph(filtered_words);
 
     // let duration = start.elapsed();
