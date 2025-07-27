@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::{self, Read, Write};
 // use std::time::Instant;
 use ladder::graph::Graph;
+use ladder::digraph::Digraph;
 
 fn main() {
     // プログラムの引数
@@ -55,7 +56,8 @@ fn main() {
     // let start = Instant::now();
 
     // 単語を頂点とし，一文字の置換・追加・削除で移り変われる単語間に辺を持つグラフを作成
-    let g = Graph::read_vertices_and_make_graph(filtered_words);
+    let g = Graph::read_vertices_and_make_graph(filtered_words.clone());
+    let h = Digraph::read_vertices_and_make_graph(filtered_words.clone());
 
     // let duration = start.elapsed();
     // println!("構築に{:?}秒かかりました．", duration);
@@ -93,6 +95,17 @@ fn main() {
                 }
                 println!()
             }
-        }
+	}
+        let p = h.path_by_label(&start, &end);
+        match p {
+            None => println!("{} から {} への経路は存在しません．", start, end),
+            Some(path) => {
+                print!("{}", path[0]);
+                for i in 1..path.len() {
+                    print!(" -> {}", path[i]);
+                }
+                println!()
+            }
+	}
     }
 }
